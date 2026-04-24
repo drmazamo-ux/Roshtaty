@@ -123,6 +123,12 @@
             color: rgba(255,255,255,0.9);
         }
 
+        /* ── Global: prevent double-tap delay on all tappable elements ── */
+        button, a, [onclick], .category-item, .folder-card, .prescription-card,
+        .note-card, .tab-btn, .quick-btn, .btn-icon, .menu-item {
+            touch-action: manipulation;
+        }
+
         body.modal-open {
             /* position:fixed prevents scroll; width:100% prevents layout shift.
                overflow-y:scroll was removed — it has no effect when position is fixed
@@ -1106,6 +1112,7 @@
             border-radius: 6px;
             background: var(--bg-card);
             cursor: pointer;
+            touch-action: manipulation;
             transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             align-items: center;
@@ -1226,6 +1233,7 @@
             background: var(--bg-main);
             border-radius: 10px;
             cursor: pointer;
+            touch-action: manipulation;
             transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             align-items: center;
@@ -1313,6 +1321,7 @@
             padding: 20px 15px;
             text-align: center;
             cursor: pointer;
+            touch-action: manipulation;
             transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
         }
@@ -1478,6 +1487,7 @@
             padding: 24px;
             padding-top: 50px;
             cursor: pointer;
+            touch-action: manipulation;
             transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             display: block;
@@ -5209,11 +5219,6 @@ Syrup Ambroxol 15mg/5ml
                     }
                 });
             }
-
-            // ── Folder card event delegation for drugsGrid ──
-            // Note: renderDrugs uses prescriptionsGrid as its container too,
-            // so the delegation on prescriptionsGrid above already covers drug folders.
-            // No separate listener needed - prescriptionsGrid handles both types.
         }
         
         // Setup search listeners
@@ -13128,7 +13133,6 @@ Syrup Ambroxol 15mg/5ml
             });
             
             grid.innerHTML = html;
-            updateHeaderCategoryButtons();
         }
         
         async function deleteDrug(drugId) {
